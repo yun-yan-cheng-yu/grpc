@@ -4,7 +4,7 @@
 // - protoc             v7.34.0--rc1
 // source: math.proto
 
-package math
+package mathpb
 
 import (
 	context "context"

@@ -4,7 +4,7 @@
 // 	protoc        v7.34.0--rc1
 // source: math.proto
 
-package math
+package mathpb
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -130,7 +130,8 @@ const file_math_proto_rawDesc = "" +
 	"\x03Num\x18\x01 \x01(\x05R\x03Num2<\n" +
 	"\bMathUtil\x12\x17\n" +
 	"\x03Add\x12\b.Vector2\x1a\x04.Num\"\x00\x12\x17\n" +
-	"\x03Sub\x12\b.Vector2\x1a\x04.Num\"\x00B\bZ\x06.;mathb\x06proto3"
+	"\x03Sub\x12\b.Vector2\x1a\x04.Num\"\x00B'\n" +
+	"\x19com.zqyyz.ranksystem.grpcP\x01Z\b.;mathpbb\x06proto3"
 
 var (
 	file_math_proto_rawDescOnce sync.Once
