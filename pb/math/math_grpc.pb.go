@@ -19,8 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	MathUtil_Add_FullMethodName = "/MathUtil/Add"
-	MathUtil_Sub_FullMethodName = "/MathUtil/Sub"
+	MathUtil_Add_FullMethodName       = "/MathUtil/Add"
+	MathUtil_Sub_FullMethodName       = "/MathUtil/Sub"
+	MathUtil_Multiply_FullMethodName  = "/MathUtil/Multiply"
+	MathUtil_DividedBy_FullMethodName = "/MathUtil/DividedBy"
 )
 
 // MathUtilClient is the client API for MathUtil service.
@@ -29,6 +31,8 @@ const (
 type MathUtilClient interface {
 	Add(ctx context.Context, in *Vector2, opts ...grpc.CallOption) (*Num, error)
 	Sub(ctx context.Context, in *Vector2, opts ...grpc.CallOption) (*Num, error)
+	Multiply(ctx context.Context, in *Vector2, opts ...grpc.CallOption) (*Num, error)
+	DividedBy(ctx context.Context, in *Vector2, opts ...grpc.CallOption) (*Num, error)
 }
 
 type mathUtilClient struct {
@@ -59,12 +63,34 @@ func (c *mathUtilClient) Sub(ctx context.Context, in *Vector2, opts ...grpc.Call
 	return out, nil
 }
 
+func (c *mathUtilClient) Multiply(ctx context.Context, in *Vector2, opts ...grpc.CallOption) (*Num, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Num)
+	err := c.cc.Invoke(ctx, MathUtil_Multiply_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mathUtilClient) DividedBy(ctx context.Context, in *Vector2, opts ...grpc.CallOption) (*Num, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Num)
+	err := c.cc.Invoke(ctx, MathUtil_DividedBy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MathUtilServer is the server API for MathUtil service.
 // All implementations must embed UnimplementedMathUtilServer
 // for forward compatibility.
 type MathUtilServer interface {
 	Add(context.Context, *Vector2) (*Num, error)
 	Sub(context.Context, *Vector2) (*Num, error)
+	Multiply(context.Context, *Vector2) (*Num, error)
+	DividedBy(context.Context, *Vector2) (*Num, error)
 	mustEmbedUnimplementedMathUtilServer()
 }
 
@@ -80,6 +106,12 @@ func (UnimplementedMathUtilServer) Add(context.Context, *Vector2) (*Num, error) 
 }
 func (UnimplementedMathUtilServer) Sub(context.Context, *Vector2) (*Num, error) {
 	return nil, status.Error(codes.Unimplemented, "method Sub not implemented")
+}
+func (UnimplementedMathUtilServer) Multiply(context.Context, *Vector2) (*Num, error) {
+	return nil, status.Error(codes.Unimplemented, "method Multiply not implemented")
+}
+func (UnimplementedMathUtilServer) DividedBy(context.Context, *Vector2) (*Num, error) {
+	return nil, status.Error(codes.Unimplemented, "method DividedBy not implemented")
 }
 func (UnimplementedMathUtilServer) mustEmbedUnimplementedMathUtilServer() {}
 func (UnimplementedMathUtilServer) testEmbeddedByValue()                  {}
@@ -138,6 +170,42 @@ func _MathUtil_Sub_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MathUtil_Multiply_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Vector2)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MathUtilServer).Multiply(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MathUtil_Multiply_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MathUtilServer).Multiply(ctx, req.(*Vector2))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MathUtil_DividedBy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Vector2)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MathUtilServer).DividedBy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MathUtil_DividedBy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MathUtilServer).DividedBy(ctx, req.(*Vector2))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MathUtil_ServiceDesc is the grpc.ServiceDesc for MathUtil service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -152,6 +220,14 @@ var MathUtil_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Sub",
 			Handler:    _MathUtil_Sub_Handler,
+		},
+		{
+			MethodName: "Multiply",
+			Handler:    _MathUtil_Multiply_Handler,
+		},
+		{
+			MethodName: "DividedBy",
+			Handler:    _MathUtil_DividedBy_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

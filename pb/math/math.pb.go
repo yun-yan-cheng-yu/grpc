@@ -127,10 +127,12 @@ const file_math_proto_rawDesc = "" +
 	"\x04Numa\x18\x01 \x01(\x05R\x04Numa\x12\x12\n" +
 	"\x04Numb\x18\x02 \x01(\x05R\x04Numb\"\x17\n" +
 	"\x03Num\x12\x10\n" +
-	"\x03Num\x18\x01 \x01(\x05R\x03Num2<\n" +
+	"\x03Num\x18\x01 \x01(\x05R\x03Num2y\n" +
 	"\bMathUtil\x12\x17\n" +
 	"\x03Add\x12\b.Vector2\x1a\x04.Num\"\x00\x12\x17\n" +
-	"\x03Sub\x12\b.Vector2\x1a\x04.Num\"\x00B'\n" +
+	"\x03Sub\x12\b.Vector2\x1a\x04.Num\"\x00\x12\x1c\n" +
+	"\bMultiply\x12\b.Vector2\x1a\x04.Num\"\x00\x12\x1d\n" +
+	"\tDividedBy\x12\b.Vector2\x1a\x04.Num\"\x00B'\n" +
 	"\x19com.zqyyz.ranksystem.grpcP\x01Z\b.;mathpbb\x06proto3"
 
 var (
@@ -153,10 +155,14 @@ var file_math_proto_goTypes = []any{
 var file_math_proto_depIdxs = []int32{
 	0, // 0: MathUtil.Add:input_type -> Vector2
 	0, // 1: MathUtil.Sub:input_type -> Vector2
-	1, // 2: MathUtil.Add:output_type -> Num
-	1, // 3: MathUtil.Sub:output_type -> Num
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	0, // 2: MathUtil.Multiply:input_type -> Vector2
+	0, // 3: MathUtil.DividedBy:input_type -> Vector2
+	1, // 4: MathUtil.Add:output_type -> Num
+	1, // 5: MathUtil.Sub:output_type -> Num
+	1, // 6: MathUtil.Multiply:output_type -> Num
+	1, // 7: MathUtil.DividedBy:output_type -> Num
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name

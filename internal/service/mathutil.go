@@ -18,3 +18,7 @@ func (s *UtilServer) Add(ctx context.Context, req *pb.Vector2) (*pb.Num, error) 
 func (s *UtilServer) Sub(ctx context.Context, req *pb.Vector2) (*pb.Num, error) {
 	return &pb.Num{Num: req.Numa - req.Numb}, nil
 }
+
+func (s *UtilServer) Multiply(ctx context.Context, req *pb.Vector2) (*pb.Num, error) {
+	return &pb.Num{Num: req.Numa * req.Numb}, nil
+}
